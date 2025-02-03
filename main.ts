@@ -1,5 +1,7 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    Hero.vy = 750
+    if (Hero.vy == 0) {
+        Hero.vy = -225
+    }
 })
 function SpawnPlayer () {
     Hero = sprites.create(img`
@@ -22,7 +24,8 @@ function SpawnPlayer () {
         `, SpriteKind.Player)
     controller.moveSprite(Hero, 150, 0)
     Hero.ay = 500
+    scene.cameraFollowSprite(Hero)
 }
 let Hero: Sprite = null
+SpawnPlayer()
 tiles.setCurrentTilemap(tilemap`level2`)
-scene.cameraFollowSprite(Hero)
